@@ -11,13 +11,13 @@ export const routes: Routes = [
         path: 'dashboard',
         loadComponent: () => 
             import('./features/dashboard/dashboard')
-        .then(m => m.Dashboard)
+        .then(m => m.Dashboard),
     },
     {
         path: 'products',
-        loadComponent: () => 
-            import('./features/products/products')
-        .then(m => m.Products)
+        loadChildren: () => 
+            import('./features/products/products.routes')
+        .then(m => m.PRODUCT_ROUTES),
     },
     {
         path: '**',
