@@ -3,6 +3,7 @@ import {
   ActivatedRoute,
   convertToParamMap,
 } from '@angular/router';
+import { of } from 'rxjs';
 
 import { ProductEdit } from './product-edit';
 
@@ -17,11 +18,11 @@ describe('ProductEdit', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            snapshot: {
-              paramMap: convertToParamMap({
+            paramMap: of(
+              convertToParamMap({
                 id: '101',
               }),
-            },
+            ),
           },
         },
       ],
@@ -37,6 +38,6 @@ describe('ProductEdit', () => {
   });
 
   it('should read product id from route', () => {
-    expect(component.productId).toBe('101');
+    expect(component.productId()).toBe('101');
   });
 });

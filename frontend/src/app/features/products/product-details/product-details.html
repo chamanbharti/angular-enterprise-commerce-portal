@@ -1,5 +1,11 @@
 <section aria-labelledby="product-details-title">
   <h2 id="product-details-title">Product Details</h2>
 
-  <p>Product ID: {{ productId }}</p>
+  <p>Product ID: {{ productId() }}</p>
+
+  <nav aria-label="Product navigation">
+    <a routerLink="/products/101">Product 101</a>
+    <a routerLink="/products/102">Product 102</a>
+    <a routerLink="/products/103">Product 103</a>
+  </nav>
 </section>
