@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { PRODUCTS_MOCK } from './data/products.mock';
-import { Product } from './models/product';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ProductService } from './services/product.service';
 
 @Component({
   imports: [RouterLink],
@@ -11,8 +10,13 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Products {
-  readonly products = signal<Product[]>(PRODUCTS_MOCK);
-  readonly activeProductCount = computed(
-    () => this.products().filter( (product) => product.active).length,
-  );
+  // readonly products = signal<Product[]>(PRODUCTS_MOCK);
+  // readonly activeProductCount = computed(
+  //   () => this.products().filter( (product) => product.active).length,
+  // );
+
+  // using service
+  private readonly productService = inject(ProductService);
+  readonly products = this.productService.products;
+  readonly activeProductCount = this.productService.activeProductCount;
 }

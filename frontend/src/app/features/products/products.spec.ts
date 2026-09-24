@@ -1,4 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
 import { Products } from './products';
@@ -24,28 +27,26 @@ describe('Products', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should contain the mock products', () => {
+  it('should expose products from ProductService', () => {
     expect(component.products().length).toBe(5);
   });
 
-  it('should calculate active product count', () => {
+  it('should expose active product count from ProductService', () => {
     expect(component.activeProductCount()).toBe(3);
   });
 
-  it('should recalculate active product count when products change', () => {
-    expect(component.activeProductCount()).toBe(3);
+  it('should render product catalog', () => {
+    const element: HTMLElement = fixture.nativeElement;
 
-    component.products.update((products) =>
-      products.map((product) =>
-        product.id === 103
-          ? {
-              ...product,
-              active: true,
-            }
-          : product,
-      ),
-    );
+    expect(element.textContent).toContain('Business Laptop Pro');
+    expect(element.textContent).toContain('27-inch Office Monitor');
+    expect(element.textContent).toContain('Ergonomic Office Chair');
+  });
 
-    expect(component.activeProductCount()).toBe(4);
+  it('should render active product count', () => {
+    const element: HTMLElement = fixture.nativeElement;
+
+    expect(element.textContent).toContain('Active Products:');
+    expect(element.textContent).toContain('3');
   });
 });
