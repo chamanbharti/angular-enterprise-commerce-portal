@@ -1,11 +1,50 @@
-<section aria-labelledby="product-details-title">
+<section class="product-details" aria-labelledby="product-details-title">
   <h2 id="product-details-title">Product Details</h2>
 
-  <p>Product ID: {{ productId() }}</p>
+  @if (product(); as product) {
+    <dl>
+      <dt>ID</dt>
+      <dd>{{ product.id }}</dd>
 
-  <nav aria-label="Product navigation">
-    <a routerLink="/products/101">Product 101</a>
-    <a routerLink="/products/102">Product 102</a>
-    <a routerLink="/products/103">Product 103</a>
-  </nav>
+      <dt>SKU</dt>
+      <dd>{{ product.sku }}</dd>
+
+      <dt>Name</dt>
+      <dd>{{ product.name }}</dd>
+
+      <dt>Category</dt>
+      <dd>{{ product.category }}</dd>
+
+      <dt>Price</dt>
+      <dd>₹{{ product.price }}</dd>
+
+      <dt>Stock</dt>
+      <dd>{{ product.stock }}</dd>
+
+      <dt>Status</dt>
+      <dd>
+        @if (product.active) {
+          <span>Active</span>
+        } @else {
+          <span>Inactive</span>
+        }
+      </dd>
+    </dl>
+
+    <nav aria-label="Product actions">
+      <a [routerLink]="['/products', product.id, 'edit']">
+        Edit Product
+      </a>
+
+      <a routerLink="/products">
+        Back to Products
+      </a>
+    </nav>
+  } @else {
+    <p>Product not found.</p>
+
+    <a routerLink="/products">
+      Back to Products
+    </a>
+  }
 </section>
