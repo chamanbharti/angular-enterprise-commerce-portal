@@ -11,4 +11,8 @@ export class ProductService {
   readonly activeProductCount = computed(
     () => this._products().filter((product) => product.active).length,
   );
+
+  findById(id: number): Product | undefined{
+    return this._products().find( product => product.id === id);
+  }
 }

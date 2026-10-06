@@ -32,4 +32,20 @@ describe('ProductService', () => {
   it('should calculate active product count', () => {
     expect(service.activeProductCount()).toBe(3);
   });
+
+  it('should find a product by id', () => {
+    const product = service.findById(101);
+
+    expect(product).toBeDefined();
+    expect(product?.id).toBe(101);
+    expect(product?.sku).toBe('LAP-1001');
+    expect(product?.name).toBe('Business Laptop Pro');
+  });
+
+  it('should return undefined when product does not exist', () =>{
+    const product = service.findById(999);
+    expect(product).toBeUndefined();
+  });
+
+
 });
